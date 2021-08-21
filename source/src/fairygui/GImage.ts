@@ -74,9 +74,14 @@ namespace fgui {
             contentItem = contentItem.getHighResolution();
             contentItem.load();
 
-            if (contentItem.scale9Grid)
-                this._content.type = cc.Sprite.Type.SLICED;
-            else if (contentItem.scaleByTile)
+            if (contentItem.scale9Grid) {
+                if (contentItem.tileGridIndice == 31) {
+                    // Tile all grids
+                    this._content.type = cc.Sprite.Type.TILED;
+                } else {
+                    this._content.type = cc.Sprite.Type.SLICED;
+                }
+            } else if (contentItem.scaleByTile)
                 this._content.type = cc.Sprite.Type.TILED;
             this._content.spriteFrame = <cc.SpriteFrame>contentItem.asset;
         }
